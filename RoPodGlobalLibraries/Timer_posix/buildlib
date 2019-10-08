@@ -1,0 +1,13 @@
+gcc -fPIC -g -c libtimer_posix.c
+
+ld -shared -soname libtimer_posix.so.1 -o libtimer_posix.so.1.0 -lc libtimer_posix.o -lpthread -lrt
+
+mv libtimer_posix.so.1.0 /usr/lib/.
+
+mkdir -p /usr/local/include/timer_posix
+cp timer.h /usr/local/include/timer_posix
+
+cd /usr/lib
+ldconfig -v -n
+ln -sf libtimer_posix.so.1.0 libtimer_posix.so
+ln -sf libtimer_posix.so.1.0 libtimer_posix.so.1
